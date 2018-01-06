@@ -54,63 +54,53 @@
           img.removeAttribute('data-src');
         };
       });
-      
+ 
 
-      
-      
+$(document).ready(function () {
+  $('.button-collapse').sideNav();
+
+  $(document).on("click", ".card", cardClicked);
+})
+
 var map, infoWindow;
-
+var MarkerInfo;
 
 function initMap() {
-          var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 10,
-            center: {lat: 32.715, lng: -117.161}
-          });
-          
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-              var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-              };
-              map.setCenter(pos);
-            }, function () {
-              handleLocationError(true, infoWindow, map.getCenter());
-            });
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: { lat: 32.715, lng: -117.161 }
+  });
 
-          } else {
-            // Browser doesn't support Geolocation
-            handleLocationError(false, infoWindow, map.getCenter());
-
-          }
-
-    
-          var geocoder = new google.maps.Geocoder();
-          getActiveRequests(map);
-    //       //document.getElementById('submit').addEventListener('click', function() {
-    //       geocodeAddress(geocoder, map);
-    // });
-}
-  
-function geocodeAddress(geocoder, resultsMap) {
-          var address = document.getElementById('address').value;
-          geocoder.geocode({'address': address}, function(results, status) {
-            if (status === 'OK') {
-              resultsMap.setCenter(results[0].geometry.location);
-              var marker = new google.maps.Marker({
-                map: resultsMap,
-                position: results[0].geometry.location
-              });
-            } else {
-              alert('Geocode was not successful for the following reason: ' + status);
-            }
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      map.setCenter(pos);
+    }, function () {
+      handleLocationError(true, infoWindow, map.getCenter());
     });
+
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+
+  }
+
+
+  var geocoder = new google.maps.Geocoder();
+  getActiveRequests(map);
+  //       //document.getElementById('submit').addEventListener('click', function() {
+  //       geocodeAddress(geocoder, map);
+  // });
 }
+
 
 
 function getActiveRequests(map) {
 
-   var config = {
+  var config = {
     apiKey: "AIzaSyDGQe1WpVMCWdCTnGLSKSrrX3t6wyydSlw",
     authDomain: "muber-2e3f5.firebaseapp.com",
     databaseURL: "https://muber-2e3f5.firebaseio.com",
@@ -136,10 +126,10 @@ function getActiveRequests(map) {
             bidStatus = childSnapshot.val().bidStatus;
 
             var geocoder = new google.maps.Geocoder();
-            geocodeAddress(geocoder, map, moveFrom);
+            geocodeAddress(geocoder, map, moveFrom, movePrice);
             console.log(map);
 
-            var divContainer = $('<div class="card customer-card">')
+            var divContainer = $('<div class="card customer-card" data-movefrom="' + moveFrom + '">')
             var divInner = $(`
               <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="http://www.mymydiy.com/wp-content/uploads/2017/10/sofa.png">
@@ -160,109 +150,6 @@ function getActiveRequests(map) {
           </div>
           `);
 
-          
-
-            // var divContainer = $('<div class= "client">');
-
-            // var divInner = $(`
-            //   <div class="client-more-less"></div>
-            //   <div class="client-meta">
-            //     <div class="client-close"></div>
-            //     <ul class="project-list">
-                  
-            //       <h4 class="client-title">${custName}</h4>
-            //       <li>Price: ${movePrice}</li>
-            //       <li>${moveDate}</li>
-            //       <li>${moveItem}</li>
-            //       <li>Start: ${moveFrom}</li>
-            //       <li>End: ${moveTo}</li>
-            //       <button type ="button" class= "button-accept>accept</button>
-            //     </ul>
-            //   </div>
-            //   <div class="overflow-wrapper">
-            //   </div>
-            //     ${custName}
-            //   </div>  
-            // `)
-
-            // var divContainer = $('<div class=" card [ is-collapsed ] ">');
-            // var divInner = $(`
-              
-              
-              
-            //   <div class="card__inner [ js-expander ]">
-            //     <span>${custName}</span>
-            //    <i class="fa fa-folder-o"></i>  
-            //   </div>
-            //   <div class="card__expander">
-            //     <i class="fa fa-close [ js-collapser ]"></i>
-            //     ${moveItem}
-            //   </div>
-            //   </div>
-            //   </div>
-              
-            // `);
-        
-      
-
-            // var divContainer = $('<div class= "card">');
-            // var divInner = $(`
-            //   <div class="card-content">
-            //     <p>${custName}</p>  
-            //     <p>${moveItem}</p>
-            //     <p>${movePrice}</p>
-            //   </div>
-            //   <div class="card-tabs">
-            //     <ul class="tabs tabs-fixed-width">
-            //       <li class="tab"><a href="#test4">Start</a></li>
-            //       <li class="tab"><a class="active" href="#test5">End</a></li>
-            //       <li class="tab"><a href="#test6">Date</a></li>
-            //     </ul>
-            //   </div>
-            //   <div class="card-content grey lighten-4">
-            //     <div id="test4">${moveFrom}</div>
-            //     <div id="test5">${moveTo}</div>
-            //     <div id="test6">${moveDate}</div>
-            //   </div>
-            // </div>`)
-              
-                // <hr class="bar">              
-          //   <div class="card-tabs">
-          //   <ul class="tabs tabs-fixed-width">
-          //     <li class="tab"><a href="#test4">Start Address</a></li>
-          //     <li class="tab"><a href="#test5">End Address</a></li>
-          //     <li class="tab"><a href="#test6">Date</a></li></ul>
-          //     <div class="card-content grey lighten-4">
-                  
-          //         <div id="test5"> ${moveTo}</div>
-          //         <div id="test4"> ${moveFrom}</div>
-          //         <div id="test6"> ${moveDate}</div>
-          //       </div>
-          // </div>
-                
-           
-                
-
-          //   <div class="card-content grey lighten-4">
-                  
-          //         <div id="test5"> ${moveTo}</div>
-          //         <div id="test4"> ${moveFrom}</div>
-          //         <div id="test6"> ${moveDate}</div>
-          //       </div>
-
-            // <div id="test4"> ${moveFrom}</div>
-            // <div id="test6"> ${moveDate}</div>
-            //   '<div class="card-content">Customer Name: ' + custName + '<p>Item: ' + moveItem + '</p>' + '<p> Price: ' + movePrice + '</div>'
-            // + '<div class="card-tabs">' + '<ul class="tabs tabs-fixed-width">' 
-            // + '<li class="tab"><a href="#test4" class="active">Start Address</a></li>' + '<li class="tab"><a href="#test5">End Address</a></li>'  + '<li class="tab"><a href="#test6">Date</a></li>'
-            // + '</ul>'
-            // + '</div>'
-            // + '<div class="card-content grey lighten-4">' 
-            // + '<div id="test4">' + moveFrom + '</div>'
-            // + '<div id="test5">' + moveTo + '</div>' 
-            // + '<div id="test6">'+ postingDate + '</div>'
-            // + '</div>'
-            // + '</div>');
 
             divContainer.append(divInner);
             $('.flex-1').append(divContainer);
@@ -270,20 +157,74 @@ function getActiveRequests(map) {
 
   
 
-function geocodeAddress(geocoder, resultsMap, moveFrom) {
-          var address = moveFrom;//.replace(/ /g,"+");
-          //console.log(address);
-          //console.log(resultsMap);
-          geocoder.geocode({'address': address}, function(results, status) {
-            console.log(results);
-            if (status === 'OK') {
-              resultsMap.setCenter(results[0].geometry.location);
-              var marker = new google.maps.Marker({
-                map: resultsMap,
-                position: results[0].geometry.location
-              });
-            } else {
-              alert('Geocode was not successful for the following reason: ' + status);
-            }
+}
+
+function cardClicked()
+{
+    alert($(this).attr("data-movefrom"));
+}
+
+function geocodeAddress(geocoder, resultsMap, moveFrom, price) {
+  var address = moveFrom;//.replace(/ /g,"+");
+  //console.log(address);
+  //console.log(resultsMap);
+  geocoder.geocode({ 'address': address }, function (results, status) {
+    console.log(results);
+    if (status === 'OK') {
+      resultsMap.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+      setInfoWindow(resultsMap, results, price);
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+
+  
+}
+
+
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+
+  directionsService.route({
+    origin: replaced_address, //document.getElementById('start').value,
+    destination: replaced_address2,  //document.getElementById('end').value,
+    travelMode: 'DRIVING'
+  }, function (response, status) {
+    if (status === 'OK') {
+      directionsDisplay.setDirections(response);
+      new google.maps.DirectionsRenderer({
+        map: map,
+        directions: response
+      });
+    } else {
+      window.alert('Directions request failed due to ' + status);
+    }
+  });
+
+}
+
+function setInfoWindow(map,marker, price) {
+        var infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+        //console.log(marker[0]);
+        service.getDetails({
+          placeId: marker[0].place_id,
+        }, function(place, status) {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            var marker = new google.maps.Marker({
+              map: map,
+              position: place.geometry.location
+            });
+            google.maps.event.addListener(marker, 'click', function() {
+              infowindow.setContent('<div><strong>' + price + '</strong><br>' +
+                'Location Type: ' + place.types[0] + '<br>' +
+                place.formatted_address + '</div>');
+              infowindow.open(map, this);
+            });
+          }
     });
-  }}
+}
+
