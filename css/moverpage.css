@@ -39,7 +39,7 @@ body {
 }
 
 .flex-1 {
-  flex: .4;
+  flex: .5;
   overflow-y: scroll; height:450px;
   flex-wrap: wrap;
   display: flex;
@@ -81,7 +81,7 @@ body {
 }
 
 .flex-2 {
-  flex: .6;
+  flex: .5;
 }
 
 .card-container .customer-card .accept-button {

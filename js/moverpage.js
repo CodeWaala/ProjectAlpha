@@ -115,6 +115,7 @@ function getActiveRequests(map) {
    database.ref().on("child_added", function (childSnapshot) {
 
             //console.log("childSnapshot", childSnapshot);
+            var key = childSnapshot.key;
             custName = childSnapshot.val().custName;
             moveFrom = childSnapshot.val().moveFrom;
             moveTo = childSnapshot.val().moveTo;
@@ -129,7 +130,7 @@ function getActiveRequests(map) {
             geocodeAddress(geocoder, map, moveFrom, movePrice);
             console.log(map);
 
-            var divContainer = $('<div class="card customer-card" data-movefrom="' + moveFrom + '">')
+            var divContainer = $('<div class="card customer-card" data-key="' + key + '" data-movefrom="' + moveFrom + '">')
             var divInner = $(`
               <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="http://www.mymydiy.com/wp-content/uploads/2017/10/sofa.png">
