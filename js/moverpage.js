@@ -1,69 +1,73 @@
-(function($){
-    $(function(){
-          $('.button-collapse').sideNav();
-          $('.parallax').parallax();
-      
-        }); // end of document ready
-      })(jQuery); // end of jQuery name space
-      
-      $( document ).ready(function(){
-        $('.button-collapse').sideNav();
-        
-      })   
+(function ($) {
+  $(function () {
+    $('.button-collapse').sideNav();
+    $('.parallax').parallax();
 
-      $('.no-touch .project-list li:nth-child(3), .no-touch .project-list li:nth-child(8)').hover(function(e) {
-        $(this).parents('.client-meta').next('.overflow-wrapper').find('img:nth-child(1)').toggleClass('show-image');
-      });
-      
-      $('.no-touch .project-list li:nth-child(4), .no-touch .project-list li:nth-child(9)').hover(function(e) {
-        $(this).parents('.client-meta').next('.overflow-wrapper').find('img:nth-child(2)').toggleClass('show-image');
-      });
-      
-      $('.no-touch .project-list li:nth-child(5), .no-touch .project-list li:nth-child(9)').hover(function(e) {
-        $(this).parents('.client-meta').next('.overflow-wrapper').find('img:nth-child(3)').toggleClass('show-image');
-      });
-      
-      $('.no-touch .project-list li:nth-child(6), .no-touch .project-list li:nth-child(10)').hover(function(e) {
-        $(this).parents('.client-meta').next('.overflow-wrapper').find('img:nth-child(4)').toggleClass('show-image');
-      });
-      
-      $('.no-touch .project-list li:nth-child(7), .no-touch .project-list li:nth-child(11)').hover(function(e) {
-        $(this).parents('.client-meta').next('.overflow-wrapper').find('img:nth-child(5)').toggleClass('show-image');
-      });
-      
-      // Reset 
-      $('.touch .client-wrap').click(function(event){
-          var target = $( event.target );
-          if ( target.hasClass( "client-close" ) ) {
-            $('.client-wrap div.client').addClass('reset');
-          }
-          else{
-            $('.client-wrap div.client').removeClass('reset');
-          }
-      });
-      
-      // White BG for client top
-      $('.no-touch .project-list li').hover(function(e) {
-        $(this).parents('.client-meta').next('.overflow-wrapper').toggleClass('white-bg');
-        $('.touch .client-wrap').toggleClass('.solid');
-      });
-      
-      [].forEach.call(document.querySelectorAll('img[data-src]'), function(img) {
-        img.setAttribute('src', img.getAttribute('data-src'));
-        img.onload = function() {
-          img.removeAttribute('data-src');
-        };
-      });
- 
+  }); // end of document ready
+})(jQuery); // end of jQuery name space
 
 $(document).ready(function () {
   $('.button-collapse').sideNav();
 
-  $(document).on("click", ".card", cardClicked);
 })
 
-var map, infoWindow;
-var MarkerInfo;
+$('.no-touch .project-list li:nth-child(3), .no-touch .project-list li:nth-child(8)').hover(function (e) {
+  $(this).parents('.client-meta').next('.overflow-wrapper').find('img:nth-child(1)').toggleClass('show-image');
+});
+
+$('.no-touch .project-list li:nth-child(4), .no-touch .project-list li:nth-child(9)').hover(function (e) {
+  $(this).parents('.client-meta').next('.overflow-wrapper').find('img:nth-child(2)').toggleClass('show-image');
+});
+
+$('.no-touch .project-list li:nth-child(5), .no-touch .project-list li:nth-child(9)').hover(function (e) {
+  $(this).parents('.client-meta').next('.overflow-wrapper').find('img:nth-child(3)').toggleClass('show-image');
+});
+
+$('.no-touch .project-list li:nth-child(6), .no-touch .project-list li:nth-child(10)').hover(function (e) {
+  $(this).parents('.client-meta').next('.overflow-wrapper').find('img:nth-child(4)').toggleClass('show-image');
+});
+
+$('.no-touch .project-list li:nth-child(7), .no-touch .project-list li:nth-child(11)').hover(function (e) {
+  $(this).parents('.client-meta').next('.overflow-wrapper').find('img:nth-child(5)').toggleClass('show-image');
+});
+
+// Reset 
+$('.touch .client-wrap').click(function (event) {
+  var target = $(event.target);
+  if (target.hasClass("client-close")) {
+    $('.client-wrap div.client').addClass('reset');
+  }
+  else {
+    $('.client-wrap div.client').removeClass('reset');
+  }
+});
+
+// White BG for client top
+$('.no-touch .project-list li').hover(function (e) {
+  $(this).parents('.client-meta').next('.overflow-wrapper').toggleClass('white-bg');
+  $('.touch .client-wrap').toggleClass('.solid');
+});
+
+[].forEach.call(document.querySelectorAll('img[data-src]'), function (img) {
+  img.setAttribute('src', img.getAttribute('data-src'));
+  img.onload = function () {
+    img.removeAttribute('data-src');
+  };
+});
+
+
+$(document).ready(function () {
+  $('.button-collapse').sideNav();
+
+  $(document).on("mouseover", ".card", cardHovered);
+  $(document).on("mouseout", ".card", cardOut);
+  $(document).on("click", ".accept-button", acceptClicked);
+})
+
+var map, infoWindow, database;
+var MarkersInfo = [];
+var IconUrl = "images/GRAY-PIN.png";
+var IconUrlHover = "images/red-pin.png";
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -110,28 +114,28 @@ function getActiveRequests(map) {
   };
 
   firebase.initializeApp(config);
-  var database = firebase.database();
+  database = firebase.database();
 
-   database.ref().on("child_added", function (childSnapshot) {
+  database.ref().on("child_added", function (childSnapshot) {
 
-            //console.log("childSnapshot", childSnapshot);
-            var key = childSnapshot.key;
-            custName = childSnapshot.val().custName;
-            moveFrom = childSnapshot.val().moveFrom;
-            moveTo = childSnapshot.val().moveTo;
-            moveDate = childSnapshot.val().moveDate;
-            movePrice = childSnapshot.val().movePrice;
-            $(".movePrice").css('color', '#FF000');
-            postingDate = childSnapshot.val().postingDate;
-            moveItem = childSnapshot.val().moveItem;
-            bidStatus = childSnapshot.val().bidStatus;
+    //console.log("childSnapshot", childSnapshot);
+    var key = childSnapshot.key;
+    custName = childSnapshot.val().custName;
+    moveFrom = childSnapshot.val().moveFrom;
+    moveTo = childSnapshot.val().moveTo;
+    moveDate = childSnapshot.val().moveDate;
+    movePrice = childSnapshot.val().movePrice;
+    $(".movePrice").css('color', '#FF000');
+    postingDate = childSnapshot.val().postingDate;
+    moveItem = childSnapshot.val().moveItem;
+    acceptStatus = childSnapshot.val().acceptStatus;
 
-            var geocoder = new google.maps.Geocoder();
-            geocodeAddress(geocoder, map, moveFrom, movePrice);
-            console.log(map);
+    var geocoder = new google.maps.Geocoder();
+    geocodeAddress(geocoder, map, moveFrom, movePrice,key);
+    //console.log(map);
 
-            var divContainer = $('<div class="card customer-card" data-key="' + key + '" data-movefrom="' + moveFrom + '">')
-            var divInner = $(`
+    var divContainer = $('<div class="card customer-card" data-acceptStatus= "' + acceptStatus + '" data-key="' + key + '" data-movefrom="' + moveFrom + '">')
+    var divInner = $(`
               <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="http://www.mymydiy.com/wp-content/uploads/2017/10/sofa.png">
               </div>
@@ -151,39 +155,54 @@ function getActiveRequests(map) {
           </div>
           `);
 
-
-            divContainer.append(divInner);
-            $('.flex-1').append(divContainer);
-      });
-
-  
+    
+    divContainer.append(divInner);
+    $('.flex-1').append(divContainer);
+    $('.accept-button').attr("disabled", acceptStatus);
+  });
 
 }
 
-function cardClicked()
-{
-    alert($(this).attr("data-movefrom"));
+function cardHovered() {
+  //alert($(this).attr("data-movefrom"));
+  MouseOver($(this).attr("data-key"));
+  //change the marker image based on the address
 }
 
-function geocodeAddress(geocoder, resultsMap, moveFrom, price) {
+function cardOut() {
+  MouseOut($(this).attr("data-key"));
+}
+
+
+function acceptClicked() {
+   var key = $(this).closest('.card').attr("data-key");
+   var acceptStatus = $(this).closest('.card').attr("data-acceptStatus");
+   var data = database.ref().orderByChild('key').equalTo(key);
+
+  if(!acceptStatus)
+  {
+   database.ref(key).update({
+       acceptStatus:true
+   })
+  }
+
+   $(this).attr("disabled", acceptStatus);
+}
+
+function geocodeAddress(geocoder, resultsMap, moveFrom, price,key) {
   var address = moveFrom;//.replace(/ /g,"+");
   //console.log(address);
   //console.log(resultsMap);
   geocoder.geocode({ 'address': address }, function (results, status) {
-    console.log(results);
+    //console.log(results);
     if (status === 'OK') {
       resultsMap.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-        map: resultsMap,
-        position: results[0].geometry.location
-      });
-      setInfoWindow(resultsMap, results, price);
+      setInfoWindow(resultsMap, results, price,key);
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
   });
 
-  
 }
 
 
@@ -207,25 +226,86 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 
 }
 
-function setInfoWindow(map,marker, price) {
-        var infowindow = new google.maps.InfoWindow();
-        var service = new google.maps.places.PlacesService(map);
-        //console.log(marker[0]);
-        service.getDetails({
-          placeId: marker[0].place_id,
-        }, function(place, status) {
-          if (status === google.maps.places.PlacesServiceStatus.OK) {
-            var marker = new google.maps.Marker({
-              map: map,
-              position: place.geometry.location
-            });
-            google.maps.event.addListener(marker, 'click', function() {
-              infowindow.setContent('<div><strong>' + price + '</strong><br>' +
-                'Location Type: ' + place.types[0] + '<br>' +
-                place.formatted_address + '</div>');
-              infowindow.open(map, this);
-            });
-          }
-    });
+function setInfoWindow(map, results, price, key) {
+  var infowindow = new google.maps.InfoWindow();
+  var service = new google.maps.places.PlacesService(map);
+  //console.log(results[0]);
+  service.getDetails({
+    placeId: results[0].place_id
+  }, function (place, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location,
+        Icon: IconUrl,
+        key:key
+      });
+      MarkersInfo.push({marker:marker, key:key});
+      console.log(MarkersInfo);
+      google.maps.event.addListener(marker, 'click', function () {
+        infowindow.setContent('<div><strong>' + price + '</strong><br>' +
+          'Location Type: ' + place.types[0] + '<br>' +
+          place.formatted_address + '</div>');
+          infowindow.open(map, this);
+          marker.setIcon({
+            url:IconUrlHover
+          })
+      });
+
+      google.maps.event.addListener(infowindow, 'closeclick', function() {
+        marker.setIcon({
+            url:IconUrl
+          })
+      });
+
+      google.maps.event.addListener(marker, 'mouseover', function() {
+          //ToDO: on mouseover link the left tile with marker
+          // $('.flex-1').each(function()
+          // {
+          //   var dkey = $(this).find('div.customer-card').attr('data-key');
+          //   console.log(dkey);
+          //   if(dkey == key)
+          //   {
+          //      dkey.css("opacity", "0.5");
+          //   }
+          // });
+      });
+      google.maps.event.addListener(marker, 'mouseout', function() {
+           
+           //ToDO: change marker and remove the link to left tile
+          //  marker.setIcon({
+          //   url:IconUrl
+          // })
+      });
+    }
+  });
 }
+
+function MouseOver(key) {
+   for(var i = 0; i < MarkersInfo.length; i++)
+   {
+     if(MarkersInfo[i].key == key)
+     {
+       //alert("true");
+       MarkersInfo[i].marker.setIcon({
+            url: IconUrlHover
+       })
+     }
+   }
+}
+
+function MouseOut(key) {
+ for(var i = 0; i < MarkersInfo.length; i++)
+   {
+     if(MarkersInfo[i].key == key)
+     {
+       //alert("true");
+       MarkersInfo[i].marker.setIcon({
+            url: IconUrl
+       })
+     }
+   }
+}
+
+
 
