@@ -39,7 +39,7 @@ body {
 }
 
 .flex-1 {
-  flex: .5;
+  flex: 1;
   overflow-y: scroll; height:450px;
   flex-wrap: wrap;
   display: flex;
@@ -58,6 +58,7 @@ body {
     flex-grow: 1;
     min-height: 100px;
     width: calc(100% * (1/3));
+    min-width: 220px;
 }
 
 .flex-1::-webkit-scrollbar-track
@@ -81,7 +82,7 @@ body {
 }
 
 .flex-2 {
-  flex: .5;
+  flex: 1;
 }
 
 .card-container .customer-card .accept-button {
@@ -100,6 +101,11 @@ left: 50;
 
 .description {
   font-weight: bold;
+}
+
+.flex-box {
+  box-shadow: 3px #494d4a;
+  border: 1px solid;
 }
 
 
