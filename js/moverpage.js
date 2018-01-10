@@ -65,7 +65,7 @@ $(document).ready(function () {
 })
 
 var map, infoWindow, database;
-var MarkersInfo = [];
+var MarkersInfo = {};
 var IconUrl = "images/GRAY-PIN.png";
 var IconUrlHover = "images/red-pin.png";
 
@@ -141,7 +141,7 @@ function getActiveRequests(map) {
               </div>
               <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">${custName}<div class = "move-price"> ${movePrice}</div><i class="material-icons right">more_vert</i></span>
-                <p><a href="#"><button class="btn waves-effect waves-light accept-button" type="submit" name="action">Accept
+                <p><a href="#"><button class="btn waves-effect waves-light accept-button" ${acceptStatus ? 'disabled' : ""} type="submit" name="action">Accept
                 <i class="material-icons right">send</i>
               </button></a></p>
               </div>
@@ -158,9 +158,9 @@ function getActiveRequests(map) {
     
     divContainer.append(divInner);
     $('.flex-1').append(divContainer);
-    $('.accept-button').attr("disabled", acceptStatus);
+    //$('.accept-button').attr("disabled", acceptStatus);
   });
-
+  
 }
 
 function cardHovered() {
@@ -176,15 +176,14 @@ function cardOut() {
 
 function acceptClicked() {
    var key = $(this).closest('.card').attr("data-key");
-   var acceptStatus = $(this).closest('.card').attr("data-acceptStatus");
+   var Status = $(this).closest('.card').attr("data-acceptStatus");
    var data = database.ref().orderByChild('key').equalTo(key);
-
-  if(!acceptStatus)
-  {
-   database.ref(key).update({
-       acceptStatus:true
+   //console.log(Status);
+  //alert("clicked");
+  console.log(key);
+     database.ref(key).update({
+     acceptStatus:true
    })
-  }
 
    $(this).attr("disabled", acceptStatus);
 }
@@ -240,7 +239,8 @@ function setInfoWindow(map, results, price, key) {
         Icon: IconUrl,
         key:key
       });
-      MarkersInfo.push({marker:marker, key:key});
+      //MarkersInfo.push({marker:marker, key:key});
+      MarkersInfo[key] = marker;
       console.log(MarkersInfo);
       google.maps.event.addListener(marker, 'click', function () {
         infowindow.setContent('<div><strong>' + price + '</strong><br>' +
@@ -258,17 +258,10 @@ function setInfoWindow(map, results, price, key) {
           })
       });
 
-      google.maps.event.addListener(marker, 'mouseover', function() {
+      google.maps.event.addListener(marker, 'mouseover', function(e) {
           //ToDO: on mouseover link the left tile with marker
-          // $('.flex-1').each(function()
-          // {
-          //   var dkey = $(this).find('div.customer-card').attr('data-key');
-          //   console.log(dkey);
-          //   if(dkey == key)
-          //   {
-          //      dkey.css("opacity", "0.5");
-          //   }
-          // });
+          // $('.customer-card[data-key=' +  key + ']').css("opacity", "0.5");
+          console.log(e);
       });
       google.maps.event.addListener(marker, 'mouseout', function() {
            
@@ -282,29 +275,36 @@ function setInfoWindow(map, results, price, key) {
 }
 
 function MouseOver(key) {
-   for(var i = 0; i < MarkersInfo.length; i++)
-   {
-     if(MarkersInfo[i].key == key)
-     {
-       //alert("true");
-       MarkersInfo[i].marker.setIcon({
+   MarkersInfo[key].setIcon({
             url: IconUrlHover
-       })
-     }
-   }
+   });
+  //  for(var i = 0; i < MarkersInfo.length; i++)
+  //  {
+  //    console.log(MarkersInfo);
+  //    if(MarkersInfo.key == key)
+  //    {
+  //      //alert("true");
+  //      MarkersInfo.setIcon({
+  //           url: IconUrlHover
+  //      })
+  //    }
+  //  }
 }
 
 function MouseOut(key) {
- for(var i = 0; i < MarkersInfo.length; i++)
-   {
-     if(MarkersInfo[i].key == key)
-     {
-       //alert("true");
-       MarkersInfo[i].marker.setIcon({
+  MarkersInfo[key].setIcon({
             url: IconUrl
-       })
-     }
-   }
+   });
+//  for(var i = 0; i < MarkersInfo.length; i++)
+//    {
+//      if(MarkersInfo[i].key == key)
+//      {
+//        //alert("true");
+//        MarkersInfo[i].marker.setIcon({
+//             url: IconUrl
+//        })
+//      }
+//    }
 }
 
 
