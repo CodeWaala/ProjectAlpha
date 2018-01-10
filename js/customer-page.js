@@ -83,6 +83,8 @@ $(document).ready(function() {
 
             });
           }
+
+         document.location.reload();
                     
     });
        
