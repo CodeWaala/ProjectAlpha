@@ -15,8 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-      <script type="text/javascript" src="js/customerPage.js"></script>
-    
+    <script type="text/javascript" src="js/customerPage.js"></script>
 </head>
 <body>
     <div class="container">
@@ -109,7 +108,7 @@
                       </button>
                       
                       <button type="addImage" class="btn-default">
-                            <input type="file" id="image" name="image"/>
+                            <input type="file" onchange="previewImage()" id="files" name="files[]" multiple />
                           </i>
                       </button>
                     </form>
@@ -125,7 +124,6 @@
     </div>
     </div>
     <script src="js/materialize.js"></script>
-    <script type="text/javascript" src="js/customerPage.js"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmTACE9kBFL5oaaEsSy_eMxEVpLtN5p3A&libraries=places">
     </script>

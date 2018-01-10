@@ -9,19 +9,19 @@ var config = {
   firebase.initializeApp(config);
 
 function previewImage() {
-      var storage = firebase.storage();
-      var file = document.getElementById("image").files[0];
-        console.log("Code MADE IT");
-      var storageRef = firebase.storage().ref();
-      var thisRef = storageRef.child(file.name);
-          thisRef.put(file).then(function(snapshot) {
-            console.log('Uploaded a blob or file!');
-            });
+  var storage = firebase.storage();
+  var file = document.getElementById("files").files[0];
+  console.log("Code MADE IT");
+  var storageRef = storage.ref();
+  var thisRef = storageRef.child(file.name);
+  thisRef.put(file).then(function(snapshot) {
+    console.log('Uploaded a blob or file!');
+  });
 
-          thisRef.getDownloadURL().then(function(url) {
-          console.log(url);
-        });
-        }
+  thisRef.getDownloadURL().then(function(url) {
+    console.log(url);
+  })
+};
 
 $(document).ready(function() {
         
@@ -59,6 +59,7 @@ $(document).ready(function() {
             event.preventDefault();
             console.log("abc");
             validate();
+            //previewImage();
             console.log("form valid:" + FormValidation);
             if(FormValidation)
             {
@@ -181,15 +182,11 @@ $(document).ready(function() {
     function validate() {
       console.log("dcb");
       var requesterName = $('#requesterName').val().trim();
-      var moveFrom = $('#moveFrom').val().trim();
-      var moveTo = $('#moveTo').val().trim();
       var moveDate = $('#moveDate').val().trim();
       var movePrice = $('#movePrice').val().trim();
       var moveItem = $('#moveItem').val().trim();
 
       var requesterNameRegex = /^(([A-Za-z]+)(\s[A-Za-z]+)?)$/gm;
-      var moveFromRegex = "";
-      var moveToRegex = "";
       var moveDateRegex = /^(?:(?:(?:0?[1-9]|1\d|2[0-8])\/(?:0?[1-9]|1[0-2]))\/(?:(?:1[6-9]|[2-9]\d)\d{2}))$|^(?:(?:(?:31\/0?[13578]|1[02])|(?:(?:29|30)\/(?:0?[1,3-9]|1[0-2])))\/(?:(?:1[6-9]|[2-9]\d)\d{2}))$|^(?:29\/0?2\/(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26]))))$/;
       var movePriceRegex = /(0\.((0[1-9]{1})|([1-9]{1}([0-9]{1})?)))|(([1-9]+[0-9]*)(\.([0-9]{1,2}))?)/;
       var moveItemRegex = /[^{}]+(?![\d}])/g;
