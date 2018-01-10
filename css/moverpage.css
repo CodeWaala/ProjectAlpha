@@ -102,4 +102,9 @@ left: 50;
   font-weight: bold;
 }
 
+.flex-box {
+  box-shadow: 3px #494d4a;
+  border: 1px solid;
+}
+
 
