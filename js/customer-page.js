@@ -231,6 +231,7 @@ $(document).ready(function() {
       return FormValidation;
     };
 
+
     
 
     $('#clearAll').on("click", function(event) {
@@ -254,7 +255,10 @@ $(document).ready(function() {
           zoom: 8,
           center: coords
         });
-          autocomplete();
+
+        $('.modal').modal();  
+        autocomplete();
+        
       }
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
@@ -274,4 +278,11 @@ $(document).ready(function() {
           }
         });
       }
+
+            // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+          
     });
+
+   
+
+  
