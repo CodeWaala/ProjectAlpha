@@ -9,35 +9,21 @@ var config = {
   firebase.initializeApp(config);
 
 function previewImage() {
-      var storage = firebase.storage();
-      var file = document.getElementById("image").files[0];
-        console.log("Code MADE IT");
-      var storageRef = firebase.storage().ref();
-      var thisRef = storageRef.child(file.name);
-          thisRef.put(file).then(function(snapshot) {
-            console.log('Uploaded a blob or file!');
-            });
-
-          thisRef.getDownloadURL().then(function(url) {
-          console.log(url);
-        });
-        }
+  var storage = firebase.storage();
+  var file = document.getElementById("files").files[0];
+  console.log("Code MADE IT");
+  var storageRef = storage.ref();
+  var thisRef = storageRef.child(file.name);
+  thisRef.put(file).then(function(snapshot) {
+    console.log('Uploaded a blob or file!');
+  });
+  thisRef.getDownloadURL().then(function(url) {
+    console.log(url);
+  })
+};
 
 $(document).ready(function() {
         
-  // Initialize Firebase
-  // var config = {
-  //   apiKey: "AIzaSyDGQe1WpVMCWdCTnGLSKSrrX3t6wyydSlw",
-  //   authDomain: "muber-2e3f5.firebaseapp.com",
-  //   databaseURL: "https://muber-2e3f5.firebaseio.com",
-  //   projectId: "muber-2e3f5",
-  //   storageBucket: "muber-2e3f5.appspot.com",
-  //   messagingSenderId: "1043531724253"
-  // };
-  // firebase.initializeApp(config);
-
-
-  //Code goes here.
   var database = firebase.database();
   var custName = "";
   var moveFrom = "";
@@ -48,27 +34,10 @@ $(document).ready(function() {
   var postingDate = "";
   var acceptStatus;
   var moverAccepted;
-  //Storage Code goes Here.
-//   function previewImage() {
-//       var storage = firebase.storage();
-//       var file = document.getElementById("image").files[0];
-//         console.log("Code MADE IT");
-//       var storageRef = firebase.storage().ref();
-//       var thisRef = storageRef.child(image.name);
-//           thisRef.put(image).then(function(snapshot) {
-//             console.log('Uploaded a Image!');
-//             });
-
-//           thisRef.getDownloadURL().then(function(url) {
-//           console.log(url);
-//         });
-// }
 
   var address;
   var replaced_address;
   var replaced_address2;
-  //var address_matrix = [];
-  //var replaced_address_matrix = [];
   var map;
   var marker;
   var locJS;
@@ -77,7 +46,6 @@ $(document).ready(function() {
   var FormValidation = false;
 
   var postingDate= moment().format('MMMM Do YYYY');
-  //console.log("postingDate: ", postingDate);
   $('#form').on('keyup keypress', function(e) {
     var keyCode = e.keyCode || e.which;
     if (keyCode === 13) { 
@@ -90,6 +58,7 @@ $(document).ready(function() {
             event.preventDefault();
             console.log("abc");
             validate();
+            //previewImage();
             console.log("form valid:" + FormValidation);
             if(FormValidation)
             {
@@ -110,7 +79,7 @@ $(document).ready(function() {
                         movePrice: movePrice,
                         postingDate: postingDate,
                         moveItem: moveItem,
-                        acceptStatus:true
+                        acceptStatus:false
 
             });
           }
@@ -120,8 +89,7 @@ $(document).ready(function() {
     database.ref().on("child_added", function(childSnapshot){
         var tableRow = $('<tr>');
         
-        
-        //console.log("childSnapshot", childSnapshot);
+      
 
         custName = childSnapshot.val().custName;
         moveFrom = childSnapshot.val().moveFrom;
@@ -166,11 +134,8 @@ $(document).ready(function() {
         .done(function(response) {
 
                   locJS= response.results[0].geometry.location; 
-                  //console.log("locJS: ", locJS);
                   locJS_matrix.push(locJS);
-                  //console.log("locJS_matrix: ", locJS_matrix);
                   initMap(locJS);
-                  //imarker();
             });
 
 
@@ -184,22 +149,17 @@ $(document).ready(function() {
         .done(function(response) {
 
                   locJS2= response.results[0].geometry.location; 
-                  //console.log("locJS2: ", locJS);
                   locJS_matrix.push(locJS2);
                   console.log("locJS_matrix: ", locJS_matrix);
-                  //initMap(locJS_matrix);
-                  //imarker();
             });
 
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer; 
         calculateAndDisplayRoute(directionsService, directionsDisplay);
-        //autocomplete();
 
  
     });
 
-    //console.log(locJS);
     function autocomplete() {
       var moveFrom = document.getElementById('moveFrom');
       var moveTo = document.getElementById('moveTo');
@@ -220,10 +180,7 @@ $(document).ready(function() {
     }
     function validate() {
       console.log("dcb");
-      //FormValidation = false;
       var requesterName = $('#requesterName').val().trim();
-      // var moveFrom = $('#moveFrom').val().trim();
-      // var moveTo = $('#moveTo').val().trim();
       var moveDate = $('#moveDate').val().trim();
       var movePrice = $('#movePrice').val().trim();
       var moveItem = $('#moveItem').val().trim();
@@ -302,8 +259,8 @@ $(document).ready(function() {
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         directionsService.route({
-          origin: replaced_address, //document.getElementById('start').value,
-          destination: replaced_address2,  //document.getElementById('end').value,
+          origin: replaced_address,
+          destination: replaced_address2,
           travelMode: 'DRIVING'
         }, function(response, status) {
           if (status === 'OK') {

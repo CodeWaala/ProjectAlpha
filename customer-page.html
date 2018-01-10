@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Customer Data Management</title>
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/customerPage.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/customer-page.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-      <script type="text/javascript" src="js/customerPage.js"></script>
-    
+    <script type="text/javascript" src="js/customer-page.js"></script>
 </head>
 <body>
     <div class="container">
@@ -25,34 +23,17 @@
             <a href="#!" class="brand-logo"><i class="material-icons left">local_shipping</i>Muber Customer</a>
             <a href="#">
             <ul class="right hide-on-med-and-down">
-              <!-- <li><a href="customerpage.html">Customer</a></li> -->
-              <!-- <li><a href="moverpage.html">Mover</a></li> -->
               <li><a class="helpLogo" href="help.html">Help</a></li>
             </ul>
           </div>
-    <!-- Jumbotron for Title -->
         <div class="row">
         <div class="col-sm-12">
         <br>
-            <!-- This panel will initially be made up of a panel of all customer requests -->
             <div>
-                <!-- Panel Heading for the retrieved articles box -->
+
                 <div>
                     <h5><strong>Display of all move requests</strong></h5>
                 </div>
-                
-               <!--  <ul class = "accordion">
-                  <li>
-                    <button class = "accordion-control">Classics</button>
-                    <div class = "accordion-panel"> <p> custName </p>;
-                      <p>moveFrom</p>;
-                      <p>moveTo</p>;
-                      <p>moveDate</p>;
-                      <p>movePrice</p>;
-                      <p>postingDate</p>;
-                      <p>moveItem</p>
-                    </div>
- -->
                         <table class="bordered">
                                 <thead>
                                     <tr>
@@ -74,13 +55,11 @@
         <div class="row">
         <div class="col-sm-12">
         <br>
-            <!-- First panel is for handling the requester info -->
             <div>
                 <div class="panel-heading">
                     <h3 class="panel-title"><strong><i></i>Add Requests</strong></h3>
                 </div>
                 <div class="panel-body">
-                    <!-- Here we create an HTML Form for handling the inputs-->
                     <form role="form" id="form">
                   
                       <div class="form-group1" id="testID">
@@ -117,7 +96,6 @@
                         <input type="text" class="form-control" id="moveItem" placeholder="i.e. furniture, tables, chairs, etc.">
                         <label for="requriedField" class="error" id="errorMoveItem"></label>
                       </div>
-                      <!-- Here we have our final submit button -->
                       <button type="submit" class="btn-default" id="Submit">
                         <i class="fa fa-search"></i>
                          Submit                      
@@ -129,9 +107,8 @@
                       </button>
                       
                       <button type="addImage" class="btn-default">
-                          <i class="fa fa-picture-o">
-                            <input type="file" id="image" name="image[]" multiple/>
-                          </i> Add Images
+                            <input type="file" onchange="previewImage()" id="files" name="files[]" multiple />
+                          </i>
                       </button>
                     </form>
                 </div>
@@ -146,7 +123,6 @@
     </div>
     </div>
     <script src="js/materialize.js"></script>
-    <script type="text/javascript" src="js/customerPage.js"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmTACE9kBFL5oaaEsSy_eMxEVpLtN5p3A&libraries=places">
     </script>
