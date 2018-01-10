@@ -38,13 +38,88 @@
   <li><a href="help.html">Help</a></li>
 </ul>
 
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+        <div>
+            <div class="panel-heading">
+                <h5 class="panel-title"><strong><i></i>Add Requests</strong></h5> 
+            </div>
+            <div class="panel-body">
+                <form role="form" id="form">
+              
+                  <div class="form-group1" id="testID">
+                    <label for="requesterName" class="formTitle">Requester Name</label>
+                    <input type="text" id="requesterName" class="form-control validate" placeholder="i.e. John Smith">
+                    <label for="requriedField" class="error" id="errorRequesterName"></label>
+                  </div>
+                 
+                  
+                  <div class="form-group2">
+                    <label for="moveFrom" class="formTitle">Moving from</label>
+                    <input type="text" class="form-control" id="moveFrom" placeholder="1 World Way, Los Angeles, CA 90045"> 
+                    <label for="requriedField" class="error" id="errorMoveFrom"></label>         
+                  </div>
+                  
+                  <div class="form-group3">
+                    <label for="moveTo" class="formTitle">Moving to</label>
+                    <input type="text" class="form-control" id="moveTo" placeholder="3225 N Harbor Dr, San Diego, CA 92101">
+                    <label for="requriedField" class="error" id="errorMoveTo"></label>
+                  </div>
+                  
+                  <div class="form-group4">
+                    <label for="moveDate" class="formTitle">Move date</label>
+                    <input type="text" class="form-control" id="moveDate" placeholder="01/01/2018">
+                    <label for="requriedField" class="error" id="errorMoveDate"></label>
+                  </div>
+                  <div class="form-group">
+                    <label for="movePrice" class="formTitle">Expected Price</label>
+                    <input type="text" class="form-control" id="movePrice" placeholder="$150">
+                    <label for="requriedField" class="error" id="errorMovePrice"></label>
+                  </div>
+                  <div class="form-group">
+                    <label for="moveItem" class="formTitle">Item description</label>
+                    <input type="text" class="form-control" id="moveItem" placeholder="i.e. furniture, tables, chairs, etc.">
+                    <label for="requriedField" class="error" id="errorMoveItem"></label>
+                  </div>
+                  <button type="submit" class="btn-default" id="Submit">
+                    <i class="fa fa-search"></i>
+                     Submit                      
+                  </button>
+                  
+                  <button type="button" class="btn-default" id="clearAll">
+                      <i class="fa fa-trash"></i>
+                       Clear Results
+                  </button>
+                  
+                  <button type="addImage" class="btn-default">
+                        <input type="file" onchange="previewImage()" id="files" name="files[]" multiple />
+                      </i>
+                  </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-footer">
+      <a href="#" class="modal-action modal-close waves-effect btn-default ">Close</a>
+    </div>
+</div>
+  </div>
+    <div class="container">
         <div class="row">
         <div class="col-sm-12">
         <br>
             <div>
 
-                <div>
-                    <h5><strong>Display of all move requests</strong></h5>
+                <div class="row">
+                    <div class= "col s8">
+                        <h5><strong>Display of all move requests</strong></h5>
+                    </div>
+                    <div class= "col s4">
+                        <!-- Modal Trigger -->
+                        <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Request</a>
+                    </div>
                 </div>
                         <table class="bordered">
                                 <thead>
@@ -64,76 +139,25 @@
                 
             </div>
         </div>
-    <div class="flexbox">
-        <div class="flex-1">
-        <!-- <br> -->
-            <div>
-                <div class="panel-heading">
-                    <h5 class="panel-title"><strong><i></i>Add Requests</strong></h5>
-                </div>
-                <div class="panel-body">
-                    <form role="form" id="form">
-                  
-                      <div class="form-group1" id="testID">
-                        <label for="requesterName" class="formTitle">Requester Name</label>
-                        <input type="text" id="requesterName" class="form-control validate" placeholder="i.e. John Smith">
-                        <label for="requriedField" class="error" id="errorRequesterName"></label>
-                      </div>
-                     
-                      
-                      <div class="form-group2">
-                        <label for="moveFrom" class="formTitle">Moving from</label>
-                        <input type="text" class="form-control" id="moveFrom" placeholder="1 World Way, Los Angeles, CA 90045"> 
-                        <label for="requriedField" class="error" id="errorMoveFrom"></label>         
-                      </div>
-                      
-                      <div class="form-group3">
-                        <label for="moveTo" class="formTitle">Moving to</label>
-                        <input type="text" class="form-control" id="moveTo" placeholder="3225 N Harbor Dr, San Diego, CA 92101">
-                        <label for="requriedField" class="error" id="errorMoveTo"></label>
-                      </div>
-                      
-                      <div class="form-group4">
-                        <label for="moveDate" class="formTitle">Move date</label>
-                        <input type="text" class="form-control" id="moveDate" placeholder="01/01/2018">
-                        <label for="requriedField" class="error" id="errorMoveDate"></label>
-                      </div>
-                      <div class="form-group">
-                        <label for="movePrice" class="formTitle">Expected Price</label>
-                        <input type="text" class="form-control" id="movePrice" placeholder="$150">
-                        <label for="requriedField" class="error" id="errorMovePrice"></label>
-                      </div>
-                      <div class="form-group">
-                        <label for="moveItem" class="formTitle">Item description</label>
-                        <input type="text" class="form-control" id="moveItem" placeholder="i.e. furniture, tables, chairs, etc.">
-                        <label for="requriedField" class="error" id="errorMoveItem"></label>
-                      </div>
-                      <button type="submit" class="btn-default" id="Submit">
-                        <i class="fa fa-search"></i>
-                         Submit                      
-                      </button>
-                      
-                      <button type="button" class="btn-default" id="clearAll">
-                          <i class="fa fa-trash"></i>
-                           Clear Results
-                      </button>
-                      
-                      <button type="addImage" class="btn-default">
-                            <input type="file" onchange="previewImage()" id="files" name="files[]" multiple />
-                          </i>
-                      </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class = "flex-2" >
+
+
+
+
+
+
+    <!-- <div class="flexbox">
+        <div class="flex-1"> -->
+        
+
+         <div class = "flex-2" > 
             <div id="map"></div>
-        </div>             
-    </div>
-    </div>
+        </div>           
+    <!-- </div> -->
+    </div> 
+</div>
 
     <footer class="page-footer white">
-        <!-- <div class="container"> -->
+        <div class="container">
           <div class="row">
             <div class="col l6 s12">
               <h5 class="black-text">Team Bio</h5>

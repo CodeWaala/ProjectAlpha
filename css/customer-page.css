@@ -22,7 +22,7 @@ body {
    }
 
    .flex-2 {
-    flex: .4;
+    flex: 1;
     flex-grow: 1;
     min-width: 300px;
   }
@@ -74,6 +74,10 @@ body {
 
 .formTitle {
   font-size: 15px;
+}
+
+.pac-container {
+  z-index: 1014;
 }
 
 /* body, html {
