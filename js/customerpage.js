@@ -17,7 +17,6 @@ function previewImage() {
   thisRef.put(file).then(function(snapshot) {
     console.log('Uploaded a blob or file!');
   });
-
   thisRef.getDownloadURL().then(function(url) {
     console.log(url);
   })
