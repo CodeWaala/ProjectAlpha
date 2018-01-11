@@ -68,6 +68,7 @@ var map, infoWindow, database;
 var MarkersInfo = {};
 var IconUrl = "images/GRAY-PIN.png";
 var IconUrlHover = "images/red-pin.png";
+var FurnitureImage = "images/furniture-picture.jpg";
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -137,7 +138,7 @@ function getActiveRequests(map) {
     var divContainer = $('<div class="card customer-card" data-acceptStatus= "' + acceptStatus + '" data-key="' + key + '" data-movefrom="' + moveFrom + '">')
     var divInner = $(`
               <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="http://arkleus.com/i/2017/10/small-sectional-sofa-modern-leather-sofa-leather-chesterfield-sofa-blue-leather-sofa--970x647.jpg">
+                <img class="activator" src=${FurnitureImage}>
               </div>
               <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">${custName}<div class = "move-price"> ${movePrice}</div><i class="material-icons right">more_vert</i></span>
