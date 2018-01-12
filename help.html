@@ -1,0 +1,127 @@
+<!DOCtype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Muber Support</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/customer-page.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/customer-page.js"></script>
+</head>
+<body>
+  <!-- Fixed nav bar -->
+  <div class="navbar-fixed">
+    <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+          <a href="index.html" class="brand-logo"><i class="material-icons left">local_shipping</i>Muber Support</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="customer-page.html">Customer</a></li>
+            <li><a href="moverpage.html">Mover</a></li>
+            <li><a href="help.html">Help</a></li>
+          </ul>
+        </div>
+    </nav>
+</div>
+<!-- Mobile Dropdown menu -->
+<ul class="side-nav" id="mobile-demo">
+  <li><a href="customer-page.html">Customer</a></li>
+  <li><a href="moverpage.html">Mover</a></li>
+  <li><a href="help.html">Help</a></li>
+</ul>
+
+  <div class="carousel carousel-slider">
+    <a class="carousel-item" href="#one!"><img src="images/Moving_Picture_1.jpg"></a>
+    <a class="carousel-item" href="#two!"><img src="images/Moving_Picture_2.jpg"></a>
+    <a class="carousel-item" href="#three!"><img src="images/Moving_Picture_3.jpg"></a>
+    <a class="carousel-item" href="#four!"><img src="images/Moving_Picture_4.jpg"></a>
+  </div>
+
+  <script>
+    $(document).ready(function(){
+      $('.carousel').carousel();
+    });
+    $('.carousel.carousel-slider').carousel({fullWidth: true});
+  </script>
+
+<div class="container">
+    <div class="section">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h1 class="center black-text"><i class="large material-icons">phone</i></h1>
+            <h5 class="center">Call</h5>
+
+            <p class="light">Please, don't call us. We have no working number, a struggling budget, and toxic workplace environment. Try the email team instead.</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h1 class="center black-text"><i class="large material-icons">email</i></h1>
+            <h5 class="center">Email</h5>
+
+            <p class="light">You've reached the email team! We are available via text, fax, and morse code. Ironic, we know. Highly dysfunctional, maybe the chat team has it together. Godspeed.</p>
+          </div>
+        </div>
+
+                <div class="col s12 m4">
+          <div class="icon-block">
+            <h1 class="center black-text"><i class="large material-icons">chat</i></h1>
+            <h5 class="center">Live Chat</h5>
+
+            <p class="light">Man wouldn't that be a cool feature. We could have put more effort into chat development but half of our team members were carried off by gremlins. I think we lost Joseph. What a shame.</p>
+          </div>
+        </div>
+</div>
+
+<footer class="page-footer white">
+        <div class="container">
+          <div class="row">
+            <div class="col l6 s12">
+              <h5 class="black-text">Questions?</h5>
+              <p class="black-text text-lighten-4">Contact one of the developers!</p>
+              <p class="black-text text-lighten-4">We will be happy to help.</p>
+    
+            </div>
+            <div class="col l3 s12">
+              <h5 class="black-text">Team</h5>
+              <ul>
+                <li><a class="black-text" href="customer-page.html">Abhi</a></li>
+                <li><a class="black-text" href="moverpage.html">Leeland</a></li>
+                <li><a class="black-text" href="help.html">Muzibul</a></li>
+                <li><a class="black-text" href="#">Will</a></li>
+              </ul>
+            </div>
+            <div class="col l3 s12">
+              <h5 class="black-text">Connect</h5>
+              <ul>
+                <a class="black-text" href="#!"><img src="images/facebook-icon.png"></a>
+                <a class="black-text" href="#!"><img src="images/instagram-icon.png"></a>
+                <a class="black-text" href="#!"><img src="images/twitter-icon.png"></a>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright ">
+            <div class="container">
+                    <p class="black-text">© 2017 Muber Inc.</h5>
+            </div>
+          </div> 
+          <script src="js/materialize.js"></script>
+          <script src="js/help-page.js"></script>
+
+</body>
+</html>
+
+  
